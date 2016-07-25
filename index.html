@@ -1,0 +1,526 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Pokemongo-bot by PokemonGoF</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Pokemongo-bot</h1>
+        <p>The Pokemon Go Bot script, baking with community.</p>
+
+        <p class="view"><a href="https://github.com/PokemonGoF/PokemonGo-Bot">View the Project on GitHub <small>PokemonGoF/PokemonGo-Bot</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/PokemonGoF/PokemonGo-Bot/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/PokemonGoF/PokemonGo-Bot/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/PokemonGoF/PokemonGo-Bot">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p align="center">
+  <a href="">
+    <img alt="Logo" src="https://www.brooklinelibrary.org/wp-content/uploads/2016/07/2000px-Pok%C3%A9_Ball.svg_-1.png" width="100">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://pokemongo-bot.herokuapp.com/"><img alt="Slack" src="https://pokemongo-bot.herokuapp.com/badge.svg"></a>
+</p>
+
+<h1>
+<a id="pokemongo-bot" class="anchor" href="#pokemongo-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PokemonGo-Bot</h1>
+
+<p>The Pokemon Go Bot, baking with community.</p>
+
+<h2>
+<a id="project-chat" class="anchor" href="#project-chat" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project Chat</h2>
+
+<p>We use <a href="https://slack.com">Slack</a> as a web chat. <a href="https://pokemongo-bot.herokuapp.com">Click here to join the chat!</a></p>
+
+<h2>
+<a id="breaking-changes" class="anchor" href="#breaking-changes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Breaking Changes</h2>
+
+<p>You need modify config.json (config.json.example for example) then pokecli.py --config config.json 
+Please clean up your old clone if you have issue, and following the <a href="https://github.com/PokemonGoF/PokemonGo-Bot#installation">install instruction</a>.</p>
+
+<h2>
+<a id="about-devmaster-branch" class="anchor" href="#about-devmaster-branch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About dev/master Branch</h2>
+
+<p>Dev branch has most up to date feature and even everyone handle the part well, still, will have broken changes. Your test contribute and PR for fix are warm welcome. 
+Master branch is the stable branch.<br>
+No PR on master branch to keep things easier.  </p>
+
+<h2>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of Contents</h2>
+
+<ul>
+<li><a href="#project-chat">Project Chat</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#todo-list">TODO List</a></li>
+<li>
+<strong>Installation</strong>
+
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installation-mac">Mac</a></li>
+<li><a href="#installation-linux">Linux</a></li>
+<li><a href="#installation-windows">Windows</a></li>
+</ul>
+</li>
+<li><a href="develop-pokemonGo-bot">Develop PokemonGo-Bot</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#how-to-run-with-docker">Docker Usage</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#credits">Credits</a></li>
+<li><a href="#donation">Donation</a></li>
+</ul>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Search Fort (Spin Pokestop)</li>
+<li>Catch Pokemon</li>
+<li>Release low cp pokemon</li>
+<li>Walking as you</li>
+<li>Limit the step to farm specific area for pokestops</li>
+<li>Use the ball you have to catch, don't if you don't have</li>
+<li>Rudimentary IV Functionality filter</li>
+<li>Auto switch mode(Full of item then catch, no ball useable then farm)</li>
+<li>Ignore certain pokemon filter</li>
+<li>Use superior ball types when necessary</li>
+<li>When out of normal pokeballs, use the next type of ball unless there are less than 10 of that type, in which case switch to farm mode</li>
+<li>Drop items when bag is full (In Testing, Document contribute needed)</li>
+<li>Pokemon catch filter (In Testing, Document contribute needed)</li>
+<li>Google Map API key setup (Readme update needed)</li>
+<li>Show all objects on map (In Testing)</li>
+<li>Evolve pokemons (Code in, Need input, In Testing)</li>
+</ul>
+
+<h2>
+<a id="todo-list" class="anchor" href="#todo-list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TODO List</h2>
+
+<ul>
+<li>[ ] Standalone Desktop APP</li>
+<li>[ ] Pokemon transfer filter ?? This already done, right?</li>
+<li>[ ] Hatch eggs</li>
+<li>[ ] Incubate eggs</li>
+<li>[ ] Use candy</li>
+<li>[ ] Fight Gym</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="requirements-click-each-one-for-install-guide" class="anchor" href="#requirements-click-each-one-for-install-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements (click each one for install guide)</h3>
+
+<ul>
+<li><a href="http://docs.python-guide.org/en/latest/starting/installation/">Python 2.7.x</a></li>
+<li><a href="https://pip.pypa.io/en/stable/installing/">pip</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">git</a></li>
+<li>
+<a href="https://virtualenv.pypa.io/en/stable/installation/">virtualenv</a> (Optional)</li>
+<li>
+<a href="https://docs.docker.com/engine/installation/">docker</a> (Optional)</li>
+<li>
+<a href="https://github.com/google/protobuf">protobuf 3</a> (OS Dependent, see below)</li>
+</ul>
+
+<h3>
+<a id="protobuf-3-installation" class="anchor" href="#protobuf-3-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Protobuf 3 installation</h3>
+
+<ul>
+<li>OS X:  <code>brew update &amp;&amp; brew install --devel protobuf</code>
+</li>
+<li>Windows: Download protobuf 3.0: <a href="https://github.com/google/protobuf/releases/download/v3.0.0-beta-4/protoc-3.0.0-beta-4-win32.zip">here</a> and unzip <code>bin/protoc.exe</code> into a folder in your PATH.</li>
+<li>Linux: <code>apt-get install python-protobuf</code>
+</li>
+</ul>
+
+<h3>
+<a id="note-on-branch" class="anchor" href="#note-on-branch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Note on branch</h3>
+
+<p>Please keep in mind that master is not always up to date whereas 'dev' is. In the installation note below change <code>master</code> to <code>dev</code> if you want to get the latest version.</p>
+
+<h3>
+<a id="installation-linux" class="anchor" href="#installation-linux" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation Linux</h3>
+
+<p>(change master to dev for the newer version)</p>
+
+<pre><code>$ git clone -b master https://github.com/PokemonGoF/PokemonGo-Bot  
+$ cd PokemonGo-Bot  
+$ pip install -r requirements.txt
+$ git submodule init
+$ git submodule update
+</code></pre>
+
+<h3>
+<a id="installation-mac" class="anchor" href="#installation-mac" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation Mac</h3>
+
+<p>(change master to dev for the newer version)</p>
+
+<pre><code>$ git clone -b master https://github.com/PokemonGoF/PokemonGo-Bot  
+$ cd PokemonGo-Bot  
+$ virtualenv .  
+$ source bin/activate  
+$ pip install -r requirements.txt
+$ git submodule init
+$ git submodule update
+</code></pre>
+
+<h3>
+<a id="installation-windows" class="anchor" href="#installation-windows" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation Windows</h3>
+
+<p>(change master to dev for the newer version)</p>
+
+<p>On Windows, you will need to install PyYaml through the installer and not through requirements.txt.</p>
+
+<h5>
+<a id="windows-vista-7-8" class="anchor" href="#windows-vista-7-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Windows vista, 7, 8:</h5>
+
+<p>Go to : <a href="http://pyyaml.org/wiki/PyYAML">http://pyyaml.org/wiki/PyYAML</a> , download the right version for your pc and install it</p>
+
+<h5>
+<a id="windows-10" class="anchor" href="#windows-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Windows 10:</h5>
+
+<p>Go to <a href="http://www.lfd.uci.edu/%7Egohlke/pythonlibs/#pyyaml">this</a> page and download: PyYAML-3.11-cp27-cp27m-win32.whl<br>
+(If running 64-bit python or if you get a 'not a supported wheel on this platform' error,
+download the 64 bit version instead: PyYAML-3.11-cp27-cp27m-win_amd64.whl )</p>
+
+<pre><code>$ cd download-directory
+$ pip install PyYAML-3.11-cp27-cp27m-win32.whl
+// if you needed to download the 64-bit version)
+// (replace PyYAML-3.11-cp27-cp27m-win32.whl with PyYAML-3.11-cp27-cp27m-win_amd64.whl
+</code></pre>
+
+<p>After this, just do :</p>
+
+<pre><code>$ git clone -b master https://github.com/PokemonGoF/PokemonGo-Bot  
+$ cd PokemonGo-Bot  
+$ pip install -r requirements.txt
+$ git submodule init
+$ git submodule update
+</code></pre>
+
+<h3>
+<a id="develop-pokemongo-bot" class="anchor" href="#develop-pokemongo-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Develop PokemonGo-Bot</h3>
+
+<pre><code>$ git clone -b dev https://github.com/PokemonGoF/PokemonGo-Bot  
+$ cd PokemonGo-Bot  
+$ virtualenv .  
+$ source bin/activate  
+$ pip install -r requirements.txt  
+$ git submodule init
+$ git submodule update
+</code></pre>
+
+<h3>
+<a id="google-maps-api-in-development" class="anchor" href="#google-maps-api-in-development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Google Maps API (in development)</h3>
+
+<p>Google Maps API: a brief guide to your own key</p>
+
+<p>This project uses Google Maps. There's one map coupled with the project, but as it gets more popular we'll definitely hit the rate-limit making the map unusable. That said, here's how you can get your own and replace ours:</p>
+
+<ol>
+<li>Navigate to this <a href="https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true">page</a>
+</li>
+<li>Select 'Create a project' in the dropdown menu.</li>
+<li>Wait an eternity.</li>
+<li>Click 'Create' on the next page (optionally, fill out the info)</li>
+<li>Copy the API key that appears.</li>
+<li>After the code done, will update here how to replace.</li>
+</ol>
+
+<h3>
+<a id="python-possible-bug" class="anchor" href="#python-possible-bug" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Python possible bug</h3>
+
+<p>If you encounter problems with the module <code>ssl</code> and it function <code>_create_unverified_context</code>. Just comment it. (Solution available in Python 2.7.11)
+To do it follow instruction below :</p>
+
+<ul>
+<li>edit <code>pokecli.py</code>
+</li>
+<li>put <code>#</code> before <code>if</code> (line 43) and <code>ssl</code> (line 44)</li>
+<li>save it</li>
+</ul>
+
+<p>Please keep in mind that this fix is necessary only if your python version don't have the <code>_create_unverified_context</code> argument in ssl module.</p>
+
+<h2>
+<a id="update" class="anchor" href="#update" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update</h2>
+
+<p>To update your project do: <code>git pull</code> in the project folder</p>
+
+<h2>
+<a id="usage-up-to-date" class="anchor" href="#usage-up-to-date" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage (up to date)</h2>
+
+<pre><code>1/ copy `config.json.example` to `config.json` and `release_config.json.example` to `release_config.json`.
+2/ Edit `config.json` and replace `auth_service`, `username`, `password`, `location` and `gmapkey` with your parameters (others keys are optional, check `Advance Configuration` below)
+</code></pre>
+
+<h2>
+<a id="advance-configuration" class="anchor" href="#advance-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advance Configuration</h2>
+
+<ul>
+<li>
+<code>max_steps</code> :</li>
+<li>
+<code>mode</code> :</li>
+<li>
+<code>walk</code> :</li>
+<li>
+<code>debug</code> : Let the default value here except if you are developper</li>
+<li>
+<code>test</code> : Let the default value here except if you are developper</li>
+<li>
+<code>initial_transfer</code> : Set this to 1 if you want to transfer pokemon</li>
+<li>
+<code>location_cache</code> : </li>
+<li>
+<code>distance_unit</code> :</li>
+<li>
+<code>item_filter</code> :</li>
+<li>
+<code>evolve_all</code> : Set to true to evolve pokemon if possible</li>
+</ul>
+
+<h3>
+<a id="evolve-all-configuration" class="anchor" href="#evolve-all-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Evolve All Configuration</h3>
+
+<pre><code>By setting the `evolve_all` attribute in config.json, you can instruct the bot to automatically
+evolve specified pokemons on startup. This is especially useful for batch-evolving after popping up
+a lucky egg (currently this needs to be done manually).
+
+The evolve all mechanism evolves only higher CP pokemons. It does this by first ordering them from high-to-low CP.
+It will also automatically transfer the evolved pokemons based on the release configuration.
+
+Examples on how to use (set in config.json):
+
+1. "evolve_all": "all"
+  Will evolve ALL pokemons.
+2. "evolve_all": "Pidgey,Weedle"
+  Will only evolve Pidgey and Weedle.
+3. Not setting evolve_all or having any other string would not evolve any pokemons on startup.
+</code></pre>
+
+<h2>
+<a id="how-to-run-with-docker" class="anchor" href="#how-to-run-with-docker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to run with Docker</h2>
+
+<h2>
+<a id="how-to-adddiscover-new-api" class="anchor" href="#how-to-adddiscover-new-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to add/discover new API</h2>
+
+<p>The example is <a href="https://github.com/PokemonGoF/PokemonGo-Bot/commit/46e2352ce9f349cc127a408959679282f9999585">here</a><br>
+    1. Check the type of your API request in   <a href="https://github.com/AeonLucid/POGOProtos/blob/eeccbb121b126aa51fc4eebae8d2f23d013e1cb8/src/POGOProtos/Networking/Requests/RequestType.proto">POGOProtos</a> For example: RECYCLE_INVENTORY_ITEM<br>
+    2. Convert to the api call in pokemongo_bot/<strong>init</strong>.py,  RECYCLE_INVENTORY_ITEM change to self.api.recycle_inventory_item
+        <code>
+        def drop_item(self,item_id,count):
+            self.api.recycle_inventory_item(...............)
+</code>
+    3. Where is the param list?<br>
+        You need check this <a href="https://github.com/AeonLucid/POGOProtos/blob/eeccbb121b126aa51fc4eebae8d2f23d013e1cb8/src/POGOProtos/Networking/Requests/Messages/RecycleInventoryItemMessage.proto">Requests/Messages/RecycleInventoryItemMessage.proto</a>
+    4. Then our final api call is<br>
+        <code>
+        def drop_item(self,item_id,count):
+            self.api.recycle_inventory_item(item_id=item_id,count=count)
+            inventory_req = self.api.call()
+            print(inventory_req)
+</code><br>
+    5. You can now debug on the log to see if get what you need  </p>
+
+<h2>
+<a id="how-to-set-up-a-simple-webserver-with-nginx" class="anchor" href="#how-to-set-up-a-simple-webserver-with-nginx" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to set up a simple webserver with nginx</h2>
+
+<h3>
+<a id="nginx-on-ubuntu-14x-16x" class="anchor" href="#nginx-on-ubuntu-14x-16x" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Nginx on Ubuntu 14.x, 16.x</h3>
+
+<h4>
+<a id="1-install-nginx-on-your-ubuntu-machine-eg-on-locally-or-aws" class="anchor" href="#1-install-nginx-on-your-ubuntu-machine-eg-on-locally-or-aws" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Install nginx on your Ubuntu machine (e.g. on locally or AWS)</h4>
+
+<pre><code>sudo apt-get update
+sudo apt-get install nginx
+</code></pre>
+
+<h4>
+<a id="2-check-the-webserver" class="anchor" href="#2-check-the-webserver" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Check the webserver</h4>
+
+<p>Check if the webserver is running by using your browser and entering the IP address of your local machine/server.
+On a local machine this would be <a href="http://127.0.0.1">http://127.0.0.1</a>. On AWS this is your public DNS if you havent configured an elastic IP.</p>
+
+<h4>
+<a id="3-change-base-directory-of-the-webserver" class="anchor" href="#3-change-base-directory-of-the-webserver" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Change Base Directory of the Webserver</h4>
+
+<pre><code>sudo nano "/etc/nginx/sites-enabled/default"
+</code></pre>
+
+<p>Comment out following line: <code>root /var/www/html;</code> and change it to the web folder of your PokemonGo-Bot: eg:</p>
+
+<pre><code>/home/user/dev/PokemonGo-Bot/web;
+</code></pre>
+
+<h2>
+<a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
+
+<h3>
+<a id="whats-iv-" class="anchor" href="#whats-iv-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's IV ?</h3>
+
+<p>Here's the <a href="http://bulbapedia.bulbagarden.net/wiki/Individual_values">introduction</a></p>
+
+<h3>
+<a id="does-it-run-automatally" class="anchor" href="#does-it-run-automatally" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Does it run automatally?</h3>
+
+<p>Not yet, still need a trainer to train the script param. But we are very close to.</p>
+
+<h3>
+<a id="set-geo-location" class="anchor" href="#set-geo-location" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Set GEO Location</h3>
+
+<p>It works, use -l "xx.yyyy,zz.ttttt" to set lat long for location. -- diordache</p>
+
+<h3>
+<a id="google-login-issues-login-error-server-busy" class="anchor" href="#google-login-issues-login-error-server-busy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Google login issues (Login Error, Server busy)?</h3>
+
+<p>Try to generate an app password and set is as</p>
+
+<pre><code>-p "&lt;your-app-password&gt;"
+</code></pre>
+
+<p>This error is mostly occurs for those who using 2 factor authentication but either way for the purpose of security would be nice to have a separate password for the bot app.</p>
+
+<h3>
+<a id="flee" class="anchor" href="#flee" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FLEE</h3>
+
+<p>The status code "3" corresponds to "Flee" - meaning your Pokemon has ran away.
+   {"responses": { "CATCH_POKEMON": { "status": 3 } }</p>
+
+<h3>
+<a id="my-pokemon-are-not-showing-up-in-my-pokedex" class="anchor" href="#my-pokemon-are-not-showing-up-in-my-pokedex" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>My pokemon are not showing up in my Pokedex?</h3>
+
+<p>Finish the tutorial on a smartphone. This will then allow everything to be visible.</p>
+
+<h3>
+<a id="how-can-i-maximise-my-xp-per-hour" class="anchor" href="#how-can-i-maximise-my-xp-per-hour" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How can I maximise my XP per hour?</h3>
+
+<p>Quick Tip: When using this script, use a Lucky egg to double the XP for 30 mins. You will level up much faster. A Lucky egg is obtained on level 9 and further on whilst leveling up. (from VipsForever via /r/pokemongodev)</p>
+
+<h3>
+<a id="how-can-i-not-collect-certain-pokemon" class="anchor" href="#how-can-i-not-collect-certain-pokemon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How can I not collect certain pokemon</h3>
+
+<p>You don't want to collect common pokemon once you hit a certain level. It will
+slow down leveling but you won't fill up either.</p>
+
+<p>Create the following filter</p>
+
+<pre><code>./data/catch-ignore.yml
+</code></pre>
+
+<p>Its a yaml file with a list of names so make it look like</p>
+
+<pre><code>ignore:
+  - Pidgey
+  - Rattata
+  - Pidgeotto
+  - Spearow
+  - Ekans
+  - Zubat
+</code></pre>
+
+<h3>
+<a id="how-do-i-use-the-map" class="anchor" href="#how-do-i-use-the-map" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How do I use the map??</h3>
+
+<p>You can either view the map via opening the html file, or by serving it with SimpleHTTPServer (runs on localhost:8000)<br>
+To use SimpleHTTPServer:<br>
+<code>$ python -m SimpleHTTPServer [port]</code>
+The default port is 8080, you can change that by giving a port number.
+Anything above port 1000 does not require root.
+You will need to set your username(s) in the userdata.js file before opening:<br>
+Copy userdata.js.example to userdata.js and edit with your favorite text editor.
+put your username in the quotes instead of "username"
+If using multiple usernames format like this:<br>
+<code>var users = ["username1","username2"];</code></p>
+
+<hr>
+
+<h2>
+<a id="contributors-dont-forget-add-yours-here-when-you-create-pr" class="anchor" href="#contributors-dont-forget-add-yours-here-when-you-create-pr" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors (Don't forget add yours here when you create PR)</h2>
+
+<ul>
+<li>eggins -- The first pull request :)</li>
+<li>crack00r</li>
+<li>ethervoid</li>
+<li>Bashin</li>
+<li>tstumm</li>
+<li>TheGoldenXY</li>
+<li>Reaver01</li>
+<li>rarshonsky</li>
+<li>earthchie</li>
+<li>haykuro</li>
+<li>05-032</li>
+<li>sinistance</li>
+<li>CapCap</li>
+<li>mzupan</li>
+<li>gnekic(GeXx)</li>
+<li>Shoh</li>
+<li>luizperes</li>
+<li>brantje</li>
+<li>VirtualSatai</li>
+<li>dmateusp</li>
+<li>jtdroste</li>
+<li>msoedov</li>
+<li>Grace</li>
+<li>Calcyfer</li>
+<li>asaf400</li>
+<li>guyz</li>
+<li>DavidK1m</li>
+<li>budi-khoirudin</li>
+<li>riberod07</li>
+<li>th3w4y</li>
+<li>Leaklessgfy</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>
+<a href="https://github.com/tejado">tejado</a> many thanks for the API</li>
+<li>
+<a href="https://github.com/Mila432/Pokemon_Go_API">Mila432</a> for the login secrets</li>
+<li>
+<a href="https://github.com/elliottcarlson">elliottcarlson</a> for the Google Auth PR</li>
+<li>
+<a href="https://github.com/AeonLucid/POGOProtos">AeonLucid</a> for improved protos</li>
+<li>
+<a href="https://github.com/AHAAAAAAA/PokemonGo-Map">AHAAAAAAA</a> for parts of the s2sphere stuff</li>
+</ul>
+
+<h2>
+<a id="donation" class="anchor" href="#donation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Donation</h2>
+
+<p>Bitcoin Address:  1PJMCx9NNQRasQYaa4MMff9yyNFffhHgLu</p>
+
+<p align="center">
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=WQUXDC54W6EVY"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"></a>
+</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/PokemonGoF">PokemonGoF</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
