@@ -32,8 +32,8 @@ class MoveToFortWorker(object):
                 step_walker = StepWalker(
                     self.bot,
                     self.config.walk,
-                    self.api._position_lat,
-                    self.api._position_lng,
+                    i2f(self.api._position_lat),
+                    i2f(self.api._position_lng),
                     position[0],
                     position[1]
                 )

@@ -11,8 +11,8 @@ class StepWalker(object):
         self.api = bot.api
 
         dist = distance(
-            i2f(initLat),
-            i2f(initLng),
+            initLat,
+            initLng,
             destLat,
             destLng
         )
@@ -29,8 +29,8 @@ class StepWalker(object):
             self.dLng = 0
             self.magnitude = 0;
         else:
-            self.dLat = (destLat - i2f(initLat)) / self.steps
-            self.dLng = (destLng - i2f(initLng)) / self.steps
+            self.dLat = (destLat - initLat) / self.steps
+            self.dLng = (destLng - initLng) / self.steps
             self.magnitude = self._pythagorean(self.dLat, self.dLng)
 
     def step(self):

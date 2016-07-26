@@ -26,7 +26,7 @@ class EvolveAllWorker(object):
             if self.config.evolve_all[0] != 'all':
                 # filter out non-listed pokemons
                 evolve_list = [x for x in evolve_list if str(x[1]) in self.config.evolve_all]
-            
+
             # enable to limit number of pokemons to evolve. Useful for testing.
             # nn = 3
             # if len(evolve_list) > nn:
@@ -131,7 +131,7 @@ class EvolveAllWorker(object):
             # cache pokemons we can't evolve. Less server calls
             cache[pokemon_name] = 1
             sleep(0.7)
-        
+
 
     # TODO: move to utils. These methods are shared with other workers.
     def transfer_pokemon(self, pid):
@@ -211,7 +211,7 @@ class EvolveAllWorker(object):
     def _get_release_config_for(self, pokemon):
         release_config = self.config.release.get(pokemon)
         if not release_config:
-            release_config = self.config.release['any']
+            release_config = self.config.release.get['any']
         return release_config
 
     def _get_exceptions(self):
@@ -243,7 +243,7 @@ class EvolveAllWorker(object):
     def _compute_iv(self, pokemon):
         total_IV = 0.0
         iv_stats = ['individual_attack', 'individual_defense', 'individual_stamina']
-        
+
         for individual_stat in iv_stats:
             try:
                 total_IV += pokemon[individual_stat]
