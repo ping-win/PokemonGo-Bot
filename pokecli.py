@@ -163,8 +163,8 @@ def init_config():
         "-ec",
         "--evolve_captured",
         help="(Ad-hoc mode) Bot will attempt to evolve all the pokemons captured!",
-        type=bool,
-        default=False
+        type=str,
+        default=[]
     )
     parser.add_argument(
         "-le",
@@ -217,6 +217,8 @@ def init_config():
 
     if config.evolve_all:
         config.evolve_all = [str(pokemon_name) for pokemon_name in config.evolve_all.split(',')]
+    if config.evolve_captured:
+        config.evolve_captured = [str(pokemon_name) for pokemon_name in config.evolve_captured.split(',')]
 
     return config
 

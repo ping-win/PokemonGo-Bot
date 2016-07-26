@@ -190,16 +190,17 @@ class PokemonCatchWorker(object):
                                     ), 'blue')
 
                                     if self.config.evolve_captured:
-                                        pokemon_to_transfer = list(Set(id_list2) - Set(id_list1))
-                                        self.api.evolve_pokemon(pokemon_id=pokemon_to_transfer[0])
-                                        response_dict = self.api.call()
-                                        status = response_dict['responses']['EVOLVE_POKEMON']['result']
-                                        if status == 1:
-                                            logger.log(
-                                                    '{} has been evolved!'.format(pokemon_name), 'green')
-                                        else:
-                                            logger.log(
-                                            'Failed to evolve {}!'.format(pokemon_name))
+                                        if 'all' in self.config.evolve_captured or pokemon_name in self.config.evolve_captured:
+                                            pokemon_to_transfer = list(Set(id_list2) - Set(id_list1))
+                                            self.api.evolve_pokemon(pokemon_id=pokemon_to_transfer[0])
+                                            response_dict = self.api.call()
+                                            status = response_dict['responses']['EVOLVE_POKEMON']['result']
+                                            if status == 1:
+                                                logger.log(
+                                                        '{} has been evolved!'.format(pokemon_name), 'green')
+                                            else:
+                                                logger.log(
+                                                'Failed to evolve {}!'.format(pokemon_name))
 
                                     if self.should_release_pokemon(pokemon_name, cp, pokemon_potential, response_dict):
                                         # Transfering Pokemon

@@ -91,7 +91,7 @@ class PokemonGoBot(object):
             outfile.truncate()
             json.dump({'lat': lat, 'lng': lng}, outfile)
 
-    def find_close_cells(self, lat, lng):
+    def find_close_cells(self, lat, lng, alt):
         cellid = get_cellid(lat, lng)
         timestamp = [0, ] * len(cellid)
 
@@ -159,61 +159,71 @@ class PokemonGoBot(object):
             # Flip the bit.
             self.config.evolve_all = []
 
-        if (self.config.mode == "all" or self.config.mode ==
-                "poke") and 'catchable_pokemons' in cell and len(cell[
-                    'catchable_pokemons']) > 0:
-            logger.log('Something rustles nearby!')
-            # Sort all by distance from current pos- eventually this should
-            # build graph & A* it
-            cell['catchable_pokemons'].sort(
-                key=
-                lambda x: distance(self.position[0], self.position[1], x['latitude'], x['longitude']))
+        if self.config.mode in ("all", "poke"):
+            rustles_nearby = []
+            rustles_nearby += cell.get('catchable_pokemons', [])
+            rustles_nearby += cell.get('wild_pokemons', [])
+            if len(rustles_nearby) > 0:
+                logger.log('Something rustles nearby!')
+                # Sort all by distance from current pos- eventually this should
+                # build graph & A* it
+                rustles_nearby = sorted(
+                    rustles_nearby,
+                    key=lambda x: distance(
+                        self.position[0],
+                        self.position[1],
+                        x['latitude'],
+                        x['longitude']
+                    )
+                )
+                user_web_catchable = 'web/catchable-%s.json' % (self.config.username)
+                for pokemon in rustles_nearby:
+                    with open(user_web_catchable, 'w') as outfile:
+                        json.dump(pokemon, outfile)
+                    if self.catch_pokemon(pokemon) == PokemonCatchWorker.NO_POKEBALLS:
+                        break
 
-            user_web_catchable = 'web/catchable-%s.json' % (self.config.username)
-            for pokemon in cell['catchable_pokemons']:
-                with open(user_web_catchable, 'w') as outfile:
-                    json.dump(pokemon, outfile)
-
-                if self.catch_pokemon(pokemon) == PokemonCatchWorker.NO_POKEBALLS:
-                    break
-                with open(user_web_catchable, 'w') as outfile:
-                    json.dump({}, outfile)
-
-        if (self.config.mode == "all" or self.config.mode == "poke"
-            ) and 'wild_pokemons' in cell and len(cell['wild_pokemons']) > 0:
-            # Sort all by distance from current pos- eventually this should
-            # build graph & A* it
-            cell['wild_pokemons'].sort(
-                key=
-                lambda x: distance(self.position[0], self.position[1], x['latitude'], x['longitude']))
-            for pokemon in cell['wild_pokemons']:
-                if self.catch_pokemon(pokemon) == PokemonCatchWorker.NO_POKEBALLS:
-                    break
-        if (self.config.mode == "all" or
-                self.config.mode == "farm"):
+        if self.config.mode in ("all", "farm"):
             if 'forts' in cell:
                 # Only include those with a lat/long
-                forts = [fort
-                         for fort in cell['forts']
-                         if 'latitude' in fort and 'type' in fort]
+                forts = [
+                    fort
+                    for fort in cell['forts']
+                    if 'latitude' in fort and
+                       'type' in fort
+                ]
                 gyms = [gym for gym in cell['forts'] if 'gym_points' in gym]
 
                 # Sort all by distance from current pos- eventually this should
                 # build graph & A* it
-                forts.sort(key=lambda x: distance(self.position[
-                           0], self.position[1], x['latitude'], x['longitude']))
+                forts = [
+                    (
+                        x,
+                        distance(
+                            self.position[0],
+                            self.position[1],
+                            x['latitude'],
+                            x['longitude']
+                        )
+                    )
+                    for x in forts
+                ]
+                forts = sorted(
+                    forts,
+                    key=lambda x: x[1]
+                )
 
-                for fort in forts:
-                    worker = MoveToFortWorker(fort, self)
-                    worker.work()
-
-                    worker = SeenFortWorker(fort, self)
-                    hack_chain = worker.work()
-                    if hack_chain > 10:
-                        #print('need a rest')
-                        break
-                    if self.config.mode == "poke":
-                        break
+                for fort, dist in forts:
+                    if dist < self.config.walk * 5/2:
+                        worker = MoveToFortWorker(fort, self)
+                        worker.work()
+                        worker = SeenFortWorker(fort, self)
+                        hack_chain = worker.work()
+                        if hack_chain > 10:
+                            #print('need a rest')
+                            break
+                        if not self.config.mode in ("all", "farm"):
+                            break
 
     def _setup_logging(self):
         self.log = logging.getLogger(__name__)

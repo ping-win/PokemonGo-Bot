@@ -211,7 +211,7 @@ class EvolveAllWorker(object):
     def _get_release_config_for(self, pokemon):
         release_config = self.config.release.get(pokemon)
         if not release_config:
-            release_config = self.config.release.get['any']
+            release_config = self.config.release.get('any')
         return release_config
 
     def _get_exceptions(self):
